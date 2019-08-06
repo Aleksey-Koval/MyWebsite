@@ -9,10 +9,7 @@ namespace MyWebsite.Controllers
     {
         public ActionResult Index()
         {
-            using (ApplicationDbContext db = new ApplicationDbContext("DefaultConnection"))
-            {
-                return View(db.Users.Include("ShoppingCart").ToList());
-            }
+            return View();
         }
 
         [Authorize(Roles = "manager")]
