@@ -1,0 +1,143 @@
+﻿@model List<MyWebsite.Models.ViewModel.ProductViewModel>
+@using Microsoft.AspNet.Identity
+
+@{
+    /**/
+
+    ViewBag.Title = "GetAllProducts";
+}
+<head>
+    <style>
+
+        td, th {
+            height: 50px;
+            padding: 0px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .raz {
+            all: unset;
+            -moz-appearance: textfield;
+            width: 3em;
+            text-align: center;
+        }
+
+            .raz::-webkit-inner-spin-button {
+                display: none;
+            }
+    </style>
+</head>
+<body>
+
+    @if (Model.Count() > 0)
+    {
+        <h3>Товары в корзине</h3>
+        <table class="table">
+            <tr style='border:none'>
+                <td style='padding:0px; border:none'>
+                    @using (Html.BeginForm("MakeOrder", "Order", FormMethod.Post))
+                    {
+                        <table class="table">
+                            @for (int i = 0; i < Model.Count(); i++)
+                            {
+                                @Html.HiddenFor(m => m[i].Id)
+                                @Html.HiddenFor(m => m[i].ProductType)
+                                @Html.HiddenFor(m => m[i].Name)
+                                @Html.HiddenFor(m => m[i].Image)
+                                @Html.HiddenFor(m => m[i].Price)
+                                <tr>
+                                    @if (@Model[i].ProductType == "Phone")
+                                    {
+                                        <td style="padding: 0px; text-align: center; vertical-align: middle; border: solid 1px black;">
+                                            <a href="/Phone/GetPhone?phoneId=@Model[i].Id">
+                                                @Html.Raw("<img style='width:50px; height:50px;' src=\"data:image/jpeg;base64,"
+                                            + Convert.ToBase64String(@Model[i].Image) + "\" />")
+                                            </a>
+                                        </td>
+                                        <td style="padding:0px;text-align: center; vertical-align: middle; border: solid 1px black;">
+                                            @Html.ActionLink(@Model[i].Name, "GetPhone", "Phone", new { phoneId = @Model[i].Id }, null)
+                                        </td>
+                                    }
+                                    @if (@Model[i].ProductType == "Tv")
+                                    {
+                                        <td style="padding: 0px; text-align: center; vertical-align: middle; border: solid 1px black;">
+                                            <a href="/Tv/GetTv?tvId=@Model[i].Id">
+                                                @Html.Raw("<img style='width:50px; height:50px;' src=\"data:image/jpeg;base64,"
+                                            + Convert.ToBase64String(@Model[i].Image) + "\" />")
+                                            </a>
+                                        </td>
+                                        <td style="padding:0px; text-align: center; vertical-align: middle; border: solid 1px black;">
+                                            @Html.ActionLink(@Model[i].Name, "GetTv", "Tv", new { tvId = @Model[i].Id }, null)
+                                        </td>
+                                    }
+                                    @if (@Model[i].ProductType == "Book")
+                                    {
+                                        <td style="padding: 0px; text-align: center; vertical-align: middle; border: solid 1px black;">
+                                            <a href="/Book/GetBook?bookId=@Model[i].Id">
+                                                @Html.Raw("<img style='width:50px; height:50px;' src=\"data:image/jpeg;base64,"
+                                            + Convert.ToBase64String(@Model[i].Image) + "\" />")
+                                            </a>
+                                        </td>
+                                        <td style="padding:0px;text-align: center; vertical-align: middle; border: solid 1px black;">
+                                            @Html.ActionLink(@Model[i].Name, "GetBook", "Book", new { bookId = @Model[i].Id }, null)
+                                        </td>
+                                    }
+                                    @if (@Model[i].ProductType == "Headphones")
+                                    {
+                                        <td style="padding: 0px; text-align: center; vertical-align: middle; border: solid 1px black;">
+                                            <a href="/Headphones/GetHeadphones?headphonesId=@Model[i].Id">
+                                                @Html.Raw("<img style='width:50px; height:50px;' src=\"data:image/jpeg;base64,"
+                                            + Convert.ToBase64String(@Model[i].Image) + "\" />")
+                                            </a>
+                                        </td>
+                                        <td style="padding:0px; vertical-align: middle; border: solid 1px black;">
+                                            @Html.ActionLink(@Model[i].Name, "GetHeadphones", "Headphones", new { headphonesId = @Model[i].Id }, null)
+                                        </td>
+                                    }
+                                    <td style='padding:0px; vertical-align: middle; border: solid 1px black;'>
+                                        @Html.DisplayFor(m => m[i].Price)
+                                    </td>
+                                    <td style='padding:0px; vertical-align: middle; border: solid 1px black;'>
+                                        <button type="button" onclick="this.nextElementSibling.stepDown()"> - </button>
+                                        @Html.EditorFor(m => m[i].Quantity, new { htmlAttributes = new { min = "1", max = "100", value = "1", @class = "raz" } })
+                                        <button type="button" onclick="this.previousElementSibling.stepUp()"> + </button>
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td colspan="4" style='padding:0px; padding-top:10px; vertical-align: middle; border:none;'>
+
+                                    <button type="submit" class="btn btn-success">Оформить заказ</button>
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                </td>
+                <td style='padding:0px; border:none;'>
+                    <table class="table">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style='padding:0px; padding-left:10px; vertical-align: middle; border:none; text-align:left'>
+                                    @using (Html.BeginForm("RemoveProductInShoppigCart", "ShoppingCart", FormMethod.Post))
+                                    {
+                                        <input type="hidden" name="productId" value="@item.Id" />
+                                        <input type="hidden" name="userID" value="@User.Identity.GetUserId()" />
+                                        <button type="submit" class="btn btn-primary btn-sm">Удалить</button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </td>
+            </tr>
+        </table>
+    }
+
+    else
+    {
+        <h3>Ваша корзина пуста</h3>
+        <a href="/" class="btn btn-success" role="button">Начать покупки</a>
+    }
+</body>

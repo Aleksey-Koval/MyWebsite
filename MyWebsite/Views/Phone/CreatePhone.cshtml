@@ -1,0 +1,289 @@
+﻿@model MyWebsite.Models.ViewModel.PhoneViewModel
+
+@{
+    ViewBag.Title = "CreatePhone";
+}
+<head>
+    <style>
+        .hrVersion2 {
+            padding: 0px;
+            margin-left: -5px;
+            margin-right: -5px;
+            margin-top: 5px;
+            margin-bottom: 0px;
+            border: none;
+            border-top: 1px ridge #aaaaaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-5 col-lg-offset-3.5" style='padding: 5px;'>
+            <div class="col-xs-12 panel panel-default" style="margin-bottom:0px; margin-top:0px; padding: 5px; border: solid 1px black;">
+                <div class="panel-body" style="padding: 0px;">
+                    <table class="table" style="margin:0px;">
+                        <tr>
+                            <td style="text-align:center; border:none; margin:0px; padding:0px;">
+                                <h3 style="margin-top:10px; margin-bottom:10px;">Добавить новый телефон</h3>
+                            </td>
+                        </tr>
+                    </table>
+                    <hr class="hrVersion2" />
+                    @using (Html.BeginForm("CreatePhone", "Phone", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <table class="table" style="margin:0px;">
+                            <!--Name-->
+                            <tr style="height:22px;">
+                                <td style="padding:0px; width: 100px; border:none;"></td>
+                                <td style="text-align:left; vertical-align: middle; min-height:1px; border:none; padding:0px; padding-left:35px;">
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { style = "padding:0px; margin:0px; vertical-align: middle;", @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; vertical-align: middle; border:none; padding:0px; padding-right:5px;">
+                                    <b>Название:</b>
+                                </td>
+                                <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <!--Company-->
+                            <tr style="height:22px;">
+                                <td style="padding:0px; border:none;"></td>
+                                <td style="text-align:left; vertical-align: middle; min-height:1px; border:none; padding:0px; padding-left:35px;">
+                                    @Html.ValidationMessageFor(model => model.Company, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; vertical-align: middle; border:none; padding:0px; padding-right:5px;">
+                                    <b>Компания:</b>
+                                </td>
+                                <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                    @Html.TextBoxFor(m => m.Company, new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <!--ScreenDiagonal-->
+                            <tr style="height:22px;">
+                                <td style="padding:0px; border:none;"></td>
+                                <td style="text-align:left; vertical-align: middle; min-height:1px; border:none; padding:0px; padding-left:35px;">
+                                    @Html.ValidationMessageFor(model => model.ScreenDiagonal, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; vertical-align: middle; border:none; padding:0px; padding-right:5px;">
+                                    <b>Диагональ экрана:</b>
+                                </td>
+                                <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                    @Html.TextBoxFor(m => m.ScreenDiagonal, new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <!--CpuName-->
+                            <tr style="height:22px;">
+                                <td style="padding:0px; border:none;"></td>
+                                <td style="text-align:left; vertical-align: middle; min-height:1px; border:none; padding:0px; padding-left:35px;">
+                                    @Html.ValidationMessageFor(model => model.CpuName, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; vertical-align: middle; border:none; padding:0px; padding-right:5px;">
+                                    <b>Название процессора:</b>
+                                </td>
+                                <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                    @Html.TextBoxFor(m => m.CpuName, new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <!--CpuNumberOfCores-->
+                            <tr style="height:22px;">
+                                <td style="padding:0px; border:none;"></td>
+                                <td style="text-align:left; vertical-align: middle; min-height:1px; border:none; padding:0px; padding-left:35px;">
+                                    @Html.ValidationMessageFor(model => model.CpuNumberOfCores, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; vertical-align: middle; border:none; padding:0px; padding-right:5px;">
+                                    <b>Количество ядер:</b>
+                                </td>
+                                <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                    @Html.TextBoxFor(m => m.CpuNumberOfCores, new { type = "number", min = "1", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <!--Frequncy-->
+                            <tr style="height:22px;">
+                                <td style="padding:0px; border:none;"></td>
+                                <td style="text-align:left; vertical-align: middle; min-height:1px; border:none; padding:0px; padding-left:35px;">
+                                    @Html.ValidationMessageFor(model => model.CpuFrequncy, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; vertical-align: middle; border:none; padding:0px; padding-right:5px;">
+                                    <b>Частота:</b>
+                                </td>
+                                <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                    @Html.TextBoxFor(m => m.CpuFrequncy, new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <!--Ram-->
+                            <tr style="height:22px;">
+                                <td style="padding:0px; border:none;"></td>
+                                <td style="text-align:left; vertical-align: middle; min-height:1px; border:none; padding:0px; padding-left:35px;">
+                                    @Html.ValidationMessageFor(model => model.Ram, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; vertical-align: middle; border:none; padding:0px; padding-right:5px;">
+                                    <b>Оперативная память:</b>
+                                </td>
+                                <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                    @Html.TextBoxFor(m => m.Ram, new { type = "number", min = "1", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <!--Memory-->
+                            <tr style="height:22px;">
+                                <td style="padding:0px; border:none;"></td>
+                                <td style="text-align:left; vertical-align: middle; min-height:1px; border:none; padding:0px; padding-left:35px;">
+                                    @Html.ValidationMessageFor(model => model.Memory, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; vertical-align: middle; border:none; padding:0px; padding-right:5px;">
+                                    <b>Встроенная память:</b>
+                                </td>
+                                <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                    @Html.TextBoxFor(m => m.Memory, new { type = "number", min = "1", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <!--OperatingSystem-->
+                            <tr style="height:22px;">
+                                <td style="padding:0px; border:none;"></td>
+                                <td style="text-align:left; vertical-align: middle; min-height:1px; border:none; padding:0px; padding-left:35px;">
+                                    @Html.ValidationMessageFor(model => model.OperatingSystem, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; vertical-align: middle; border:none; padding:0px; padding-right:5px;">
+                                    <b>Операционная система:</b>
+                                </td>
+                                <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                    @Html.TextBoxFor(m => m.OperatingSystem, new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <!--Camera-->
+                            <tr style="height:22px;">
+                                <td style="padding:0px; border:none;"></td>
+                                <td style="text-align:left; vertical-align: middle; min-height:1px; border:none; padding:0px; padding-left:35px;">
+                                    @Html.ValidationMessageFor(model => model.Camera, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; vertical-align: middle; border:none; padding:0px; padding-right:5px;">
+                                    <b>Основная камера:</b>
+                                </td>
+                                <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                    @Html.TextBoxFor(m => m.Camera, new { type = "number", min = "1", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <!--FrontCamera-->
+                            <tr style="height:22px;">
+                                <td style="padding:0px; border:none;"></td>
+                                <td style="text-align:left; vertical-align: middle; min-height:1px; border:none; padding:0px; padding-left:35px;">
+                                    @Html.ValidationMessageFor(model => model.FrontCamera, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; vertical-align: middle; border:none; padding:0px; padding-right:5px;">
+                                    <b>Фронтальная камера:</b>
+                                </td>
+                                <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                    @Html.TextBoxFor(m => m.FrontCamera, new { type = "number", min = "1", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <!--BatteryCapacity-->
+                            <tr style="height:22px;">
+                                <td style="padding:0px; border:none;"></td>
+                                <td style="text-align:left; vertical-align: middle; min-height:1px; border:none; padding:0px; padding-left:35px;">
+                                    @Html.ValidationMessageFor(model => model.BatteryCapacity, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; vertical-align: middle; border:none; padding:0px; padding-right:5px;">
+                                    <b>Емкость батареи:</b>
+                                </td>
+                                <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                    @Html.TextBoxFor(m => m.BatteryCapacity, new { type = "number", min = "1", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <!--Description-->
+                            <tr style="height:22px;">
+                                <td style="padding:0px; border:none;"></td>
+                                <td style="text-align:left; vertical-align: middle; min-height:1px; border:none; padding:0px; padding-left:35px;">
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; vertical-align: middle; border:none; padding:0px; padding-right:5px;">
+                                    <b>Описание:</b>
+                                </td>
+                                <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <!--Price-->
+                            <tr style="height:22px;">
+                                <td style="padding:0px; border:none;"></td>
+                                <td style="text-align:left; vertical-align: middle; min-height:1px; border:none; padding:0px; padding-left:35px;">
+                                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; vertical-align: middle; border:none; padding:0px; padding-right:5px;">
+                                    <b>Цена:</b>
+                                </td>
+                                <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                    @Html.TextBoxFor(m => m.Price, new { type = "number", min = "1", step = "1", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <!--Image-->
+                            <tr style="height:22px;">
+                                <td style="padding:0px; border:none;"></td>
+                                <td style="text-align:left; vertical-align: middle; min-height:1px; border:none; padding:0px; padding-left:35px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; vertical-align: middle; border:none; padding:0px; padding-right:5px;">
+                                    <b>Фото:</b>
+                                </td>
+                                <td style="text-align:left; vertical-align: middle; border:none; padding:0px;">
+                                    <div style="position:relative;">
+                                        <a class='btn btn-default' href='javascript:;' style="width:130px;">
+                                            Выберите файл
+                                            <input type="file" name="uploadImage" style='width:130px; font-size: 25px; position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' size="40" onchange='$("#upload-file-info").html($(this).val().replace("C:\\fakepath\\", ""));'>
+                                        </a>
+                                        &nbsp;
+                                        <span class='label label-info' id="upload-file-info"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <hr class="hrVersion2" style="margin-top:22px;" />
+
+                        <table class="table" style="margin:0px;">
+                            <tr>
+                                <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                    <input type="submit" style="margin-top:10px; margin-bottom:5px; width:200px;" class="btn btn-success btn-lg" value="Добавить" />
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>
+
+
+

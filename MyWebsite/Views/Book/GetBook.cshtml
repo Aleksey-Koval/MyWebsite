@@ -1,0 +1,153 @@
+﻿@model MyWebsite.Models.ViewModel.BookViewModel
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "GetBook";
+}
+
+<head>
+    <style>
+        p {
+            font-size: 15px;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .pVersion2 {
+            font-size: 20px;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .hrVersion2 {
+            padding: 0px;
+            margin-left: -5px;
+            margin-right: -5px;
+            margin-top: 5px;
+            margin-bottom: 0px;
+            border: none;
+            border-top: 1px ridge #aaaaaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3" style='padding: 5px;'>
+            <div class="col-xs-12 panel panel-default" style="margin-bottom:0px; margin-top:0px; padding: 5px; border: solid 1px black;">
+                <div class="panel-body" style="padding: 0px;">
+                    <table class="table" style="margin:0px;">
+                        <tr>
+                            <td style="text-align:center; border:none; margin:0px; padding:0px;">
+                                <h3 style="margin-top:10px; margin-bottom:10px;">@Model.Author - @Model.Name</h3>
+                            </td>
+                        </tr>
+                    </table>
+                    <hr class="hrVersion2" style="margin-bottom: 5px;" />
+                    <table class="table" style="margin:0px;">
+                        <tr style="height:25px;">
+                            <td rowspan="6" style="padding: 0px;  text-align: center; vertical-align: middle; width: 200px; height:200px; border:none;">
+                                @Html.Raw("<img style='width:200px; height:200px;' src=\"data:image/jpeg;base64,"
+                          + Convert.ToBase64String(Model.Image) + "\" />")
+                            </td>
+                            <td style="padding:0px; text-align:right; vertical-align: middle; border:none; width:150px;">
+                                <p><b>Автор: </b></p>
+                            </td>
+                            <td style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p>@Model.Author</p>
+                            </td>
+                        </tr>
+
+                        <tr style="height:30px;">
+                            <td style="padding:0px; text-align:right; vertical-align: middle; border:none;">
+                                <p><b>Название: </b></p>
+                            </td>
+                            <td style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p>@Model.Name</p>
+                            </td>
+                        </tr>
+
+                        <tr style="height:30px;">
+                            <td style="padding:0px; text-align:right; vertical-align: middle; border:none;">
+                                <p><b>Жанр:</b></p>
+                            </td>
+                            <td style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p>@Model.Genre</p>
+                            </td>
+                        </tr>
+
+                        <tr style="height:30px;">
+                            <td style="padding:0px; text-align:right; vertical-align: middle; border:none;">
+                                <p><b>Издательский дом:</b></p>
+                            </td>
+                            <td style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p>@Model.PublishingHouse</p>
+                            </td>
+                        </tr>
+
+                        <tr style="height:30px;">
+                            <td style="padding:0px; text-align:right; vertical-align: middle; border:none;">
+                                <p><b>Год издания: </b></p>
+                            </td>
+                            <td style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p>@Model.YearOfPublishing год</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border:none;"></td>
+                            <td style="border:none;"></td>
+                        </tr>
+                    </table>
+                    <hr class="hrVersion2" style="padding-bottom:5px;" />
+                    <table class="table" style="margin:0px;">
+                        <tr>
+                            <td style="padding:0px; text-align:right; vertical-align: text-top; width: 90px;border:none;">
+                                <p><b>Аннотация:</b></p>
+                            </td>
+                            <td colspan="2" style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p style="font-size: 14px;">@Model.Annotation</p>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <hr class="hrVersion2" style="margin-bottom: 5px;" />
+                    @using (Html.BeginForm("AddProductToShoppingCart", "ShoppingCart", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" name="productId" value="@Model.Id" />
+                        <input type="hidden" name="userID" value="@User.Identity.GetUserId()" />
+                        <table class="table" style="margin:0px;">
+                            <tr>
+                                <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                    <p class="pVersion2">Цена: <b>@Model.Price</b> грн</p>
+                                </td>
+                                <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                    <input type="submit" style="margin:0px; width:160px;" class="btn btn-lg btn-success" value="Купить" />
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                </div>
+            </div>
+
+            @if (User.IsInRole("manager"))
+            {
+                using (Html.BeginForm("EditBook", "Book", FormMethod.Get, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="bookId" value="@Model.Id" />
+                    <table class="table" style="margin:0px;">
+                        <tr>
+                            <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                <input type="submit" style="margin-top:10px; margin-bottom:5px; width:160px;" class="btn btn-danger" value="Редактировать" />
+                            </td>
+                        </tr>
+                    </table>
+                }
+            }
+        </div>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>

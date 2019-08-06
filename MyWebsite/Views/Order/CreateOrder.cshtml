@@ -1,0 +1,25 @@
+﻿@model MyWebsite.Models.ViewModel.OrderViewModel
+@{
+    ViewBag.Title = "CreateOrder";
+}
+<head>
+</head>
+<body>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title text-center" id="myModalLabel">Ваш заказ успешно оформлен</h4>
+        </div>
+
+        <div class="modal-body" style='text-align: center;'>
+            <div>
+                <p><b>Номер заказа: </b>№@Model.Id </p>
+                <p><b>Количество товара: </b>@Model.QuantityProducts</p>
+                <p><b>Сумма: </b>@Model.Sum</p>
+            </div>
+            <div>
+                <a href="/" class="btn btn-success" role="button">Вернуться в магазин</a>
+            </div>
+
+        </div>
+    </div>
+</body>

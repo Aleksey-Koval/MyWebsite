@@ -1,0 +1,254 @@
+﻿@model MyWebsite.Models.ViewModel.OrderViewModel
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "MakeOrder";
+}
+
+<head>
+    <style>
+        p {
+            font-size: 20px;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .pVersion2 {
+            font-size: 15px;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .hrVersion1 {
+            padding: 0px;
+            margin-left: -5px;
+            margin-right: -5px;
+            margin-top: 5px;
+            margin-bottom: 4px;
+            height: 1px;
+            border: none;
+            border-top: 1px dashed #808080;
+        }
+
+        .hrVersion2 {
+            padding: 0px;
+            margin-left: -5px;
+            margin-right: -5px;
+            margin-top: 5px;
+            margin-bottom: 4px;
+            height: 1px;
+            border: none;
+            border-top: 1px ridge #949494;
+        }
+
+        .inline {
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .raz {
+            all: unset;
+            -moz-appearance: textfield;
+            width: 3em;
+            text-align: center;
+        }
+
+            .raz::-webkit-inner-spin-button {
+                display: none;
+            }
+    </style>
+</head>
+<body>
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-sm-12" style='padding: 5px;'>
+            <div class="col-sm-12 panel panel-default" style="margin-bottom:0px; margin-top:0px; padding: 5px; border: solid 1px black;">
+                <div class="panel-body" style="padding: 0px;">
+                    <table class="table" style="margin:0px;">
+                        <tr>
+                            <td style="text-align:center; border:none; margin:0px; padding:0px;">
+                                <h3 style="margin-top:10px; margin-bottom:10px;">Товары в корзине</h3>
+                            </td>
+                        </tr>
+                    </table>
+                    <hr class="hrVersion1" />
+                    @foreach (var item in Model.ProductsForOrderViewModel)
+                    {
+                        <table class="table" style="margin:0px;">
+                            <tr>
+                                @if (@item.ProductType == "Phone")
+                                {
+                                    <td rowspan="2" style="padding: 0px; width: 100px; text-align: center; vertical-align: middle; border:none;">
+
+                                        <a href="/Phone/GetPhone?phoneId=@item.Id">
+
+                                            @Html.Raw("<img style='width:100px; height:100px;' src=\"data:image/jpeg;base64,"
+                                        + Convert.ToBase64String(item.Image) + "\" />")
+                                        </a>
+                                    </td>
+                                    <td colspan="3" style='padding:0px; padding-left: 15px; height:50px; vertical-align: middle; border:none;'>
+                                        <p>@Html.ActionLink(@item.Name, "GetPhone", "Phone", new { phoneId = @item.Id }, null)<span style="color: #949494"> №@item.ProductId</span></p>
+                                    </td>
+                                }
+                                @if (@item.ProductType == "Tv")
+                                {
+                                    <td rowspan="2" style="padding: 0px; width: 100px; text-align: center; vertical-align: middle; border:none;">
+
+                                        <a href="/Tv/GetTv?tvId=@item.Id">
+
+                                            @Html.Raw("<img style='width:100px; height:100px;' src=\"data:image/jpeg;base64,"
+                                        + Convert.ToBase64String(item.Image) + "\" />")
+                                        </a>
+                                    </td>
+                                    <td colspan="3" style='padding:0px; padding-left: 15px; height:50px; vertical-align: middle; border:none;'>
+                                        <p>@Html.ActionLink(@item.Name, "GetTv", "Tv", new { tvId = @item.Id }, null)<span style="color: #949494"> №@item.ProductId</span></p>
+                                    </td>
+                                }
+                                @if (@item.ProductType == "Book")
+                                {
+                                    <td rowspan="2" style="padding: 0px; width: 100px; text-align: center; vertical-align: middle; border:none;">
+
+                                        <a href="/Book/GetBook?bookId=@item.Id">
+
+                                            @Html.Raw("<img style='width:100px; height:100px;' src=\"data:image/jpeg;base64,"
+                                        + Convert.ToBase64String(item.Image) + "\" />")
+                                        </a>
+                                    </td>
+                                    <td colspan="3" style='padding:0px; padding-left: 15px; height:50px; vertical-align: middle; border:none;'>
+                                        <p>@Html.ActionLink(@item.Name, "GetBook", "Book", new { bookId = @item.Id }, null)<span style="color: #949494"> №@item.ProductId</span></p>
+                                    </td>
+                                }
+                                @if (@item.ProductType == "Headphones")
+                                {
+                                    <td rowspan="2" style="padding: 0px; width: 100px; text-align: center; vertical-align: middle; border:none;">
+
+                                        <a href="/Headphones/GetHeadphones?headphonesId=@item.Id">
+
+                                            @Html.Raw("<img style='width:100px; height:100px;' src=\"data:image/jpeg;base64,"
+                                        + Convert.ToBase64String(item.Image) + "\" />")
+                                        </a>
+                                    </td>
+                                    <td colspan="3" style='padding:0px; padding-left: 15px; height:50px; vertical-align: middle; border:none;'>
+                                        <p>@Html.ActionLink(@item.Name, "GetHeadphones", "Headphones", new { headphonesId = @item.Id }, null)<span style="color: #949494"> №@item.ProductId</span></p>
+                                    </td>
+                                }
+                            </tr>
+                            <tr>
+                                <td style='padding:0px; height:50px; width:40%; text-align: center; vertical-align: middle; border:none;'>
+                                    <p>@item.Price грн</p>
+                                </td>
+                                <td style='padding:0px; height:50px; width:20%;text-align: center; vertical-align: middle; border:none;'>
+                                    <p>
+                                        @item.Quantity
+                                    </p>
+                                </td>
+                                <td style='padding:0px; height:50px; width:40%; text-align: center; vertical-align: middle; border:none;'>
+                                    <p>@item.Sum грн</p>
+                                </td>
+                            </tr>
+                        </table>
+                        if (item != Model.ProductsForOrderViewModel.Last())
+                        {
+                            <hr class="hrVersion1" />
+                        }
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-sm-12" style='padding: 5px;'>
+            <div class="col-sm-12 panel panel-default" style="margin-bottom:0px; margin-top:0px; padding: 5px; border: solid 1px black;">
+                <div class="panel-body" style="padding: 0px;">
+                    @using (Html.BeginForm("CreateOrder", "Order", FormMethod.Post, htmlAttributes: new { id = "data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <table class="table pVersion2" style="margin:0px;">
+                            <tr>
+                                <td colspan="2" style="text-align:center; border:none; margin:0px; padding:0px;"><h3 style="margin-top:10px; margin-bottom:15px;">Данные для заказа</h3></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; width:50%; border:none;">Телефон:</td>
+                                <td style="text-align:left; border:none; margin:0px; padding:0px; vertical-align: middle;">
+                                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PhoneNumber)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; border:none;">Адрес пункта выдачи:</td>
+                                <td style="text-align:left; border:none; margin:0px; padding:0px; vertical-align: middle;">
+                                    <div class="form-group" style="margin:0px; padding:0px;">
+                                        <select id="Address" class="form-control" name="Address">
+                                            <option value="Магазин №1, ул. Магазинная 1." selected>Магазин №1, ул. Магазинная 1.</option>
+                                            <option value="Магазин №2, ул. Магазинная 2.">Магазин №2, ул. Магазинная 2.</option>
+                                            <option value="Магазин №3, ул. Магазинная 3.">Магазин №3, ул. Магазинная 3.</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; border:none;">Способ оплаты:</td>
+                                <td style="text-align:left; border:none;">
+                                    <div class="form-group" style="margin:0px; padding:0px;">
+                                        @if (Model.PaymentMethod == "Безналичный")
+                                        {
+                                            <label><input type="radio" name="paymentMethod" value="Наличный"> Наличный</label>
+                                            <label><input type="radio" name="paymentMethod" value="Безналичный" checked> Безналичный</label>
+                                        }
+                                        else
+                                        {
+                                            <label><input type="radio" name="paymentMethod" value="Наличный" checked> Наличный</label>
+                                            <label><input type="radio" name="paymentMethod" value="Безналичный"> Безналичный</label>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="form-group">
+                            <input type="hidden" name="UserId" value="@User.Identity.GetUserId()" />
+                            @Html.HiddenFor(model => model.Sum)
+                            @{
+                                int i = 0;
+
+                                foreach (var item in Model.ProductsForOrderViewModel)
+                                {
+                                    <input type="hidden" name="ProductsForOrderViewModel[@i].ProductId" value="@item.ProductId" />
+                                    <input type="hidden" name="ProductsForOrderViewModel[@i].Name" value="@item.Name" />
+                                    <input type="hidden" name="ProductsForOrderViewModel[@i].Price" value="@item.Price" />
+                                    <input type="hidden" name="ProductsForOrderViewModel[@i].Quantity" value="@item.Quantity" />
+                                    <input type="hidden" name="ProductsForOrderViewModel[@i].Sum" value="@item.Sum" />
+                                    i++;
+                                }
+                            }
+                        </div>
+                    }
+                    <hr class="hrVersion2" />
+                    <table class="table" style="margin:0px; padding-top:5px;">
+                        <tr style="height: 50px;">
+                            <td style="padding: 0px; width: 170px; text-align: center; vertical-align: middle; border:none;">
+                                @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                                {
+                                    <input type="submit" value="Продолжить покупки" class="btn btn-default" />
+                                }
+                            </td>
+                            <td style="border:none;"></td>
+                            <td style="padding: 0px; width: 300px; text-align:center; vertical-align: middle; border:none;">
+                                <p>Итого к оплате: <b>@Model.Sum</b> грн</p>
+                            </td>
+                            <td style="padding: 0px; text-align:center; vertical-align: middle; width: 150px; border:none;">
+                                <input type="submit" value="Оформить заказ" form="data" class="btn btn-success" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section scripts
+{
+        @Scripts.Render("~/bundles/jqueryval")
+
+    }
+</body>

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<MyWebsite.Models.ViewModel.OrderViewModel>
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "GetAllOrders";
+}
+<head>
+    <style>
+
+        td, th {
+            height: 40px;
+            padding: 0px;
+            border: solid 1px black;
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    @if (Model.Count() > 0)
+    {
+        <h2>Новые заказы</h2>
+        <table class="table">
+            <tr>
+                <th style='vertical-align: middle ; border: solid 1px black'>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th style='vertical-align: middle ; border: solid 1px black'>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th style='vertical-align: middle ; border: solid 1px black'>
+                    @Html.DisplayNameFor(model => model.QuantityProducts)
+                </th>
+                <th style='vertical-align: middle ; border: solid 1px black'>
+                    @Html.DisplayNameFor(model => model.Sum)
+                </th>
+                <th style='vertical-align: middle ; border: solid 1px black'>
+                    @Html.DisplayNameFor(model => model.Orderstatus)
+                </th>
+
+                <th style='border:none'>
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style='padding:0px; vertical-align: middle'>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td style='padding:0px; vertical-align: middle'>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td style='padding:0px; vertical-align: middle'>
+                        @Html.DisplayFor(modelItem => item.QuantityProducts)
+                    </td>
+                    <td style='padding:0px; vertical-align: middle'>
+                        @Html.DisplayFor(modelItem => item.Sum)
+                    </td>
+                    <td style='padding:0px; vertical-align: middle'>
+                        @Html.DisplayFor(modelItem => item.Orderstatus)
+                    </td>
+                    <td style='padding:0px; vertical-align: middle; border:none'>
+                        @using (Html.BeginForm("GetOrderDetails", "Order", FormMethod.Post))
+                        {
+                            @Html.Hidden("OrderId", item.Id)
+                            <button type="submit" class="btn bg-primary btn-sm p-0 m-0">Подробно</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <h3>Новых заказов нет</h3>
+    }
+
+</body>

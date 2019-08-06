@@ -1,0 +1,93 @@
+﻿@model IEnumerable<MyWebsite.Models.ApplicationUser>
+@using Microsoft.AspNet.Identity
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @{
+        ViewBag.Title = "Index";
+    }
+
+
+</head>
+<body>
+    <div class="row">
+        <div class="col-xs-6 col-sm-4 col-md-3" style='padding: 5px;'>
+            <div class="col-xs-12 panel panel-default" style="margin-bottom:0px; margin-top:0px; padding: 5px; border: solid 1px black;">
+                <div class="panel-body" style="padding: 0px;">
+                    <table class="table" style="margin:0px;">
+                        <tr>
+                            <td style="padding: 0px; width: 100px; height:50px; text-align: center; vertical-align: middle; border:none;">
+                                <a href="/Book/GetBooks"><img src="/Content/Images/books.jpg" style="width:150px; height:150px"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0px; height:50px; text-align: center; vertical-align: middle; border:none;">
+                                <a class="btn btn-default btn-lg" style="width:200px;" href="/Book/GetBooks">Книги</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-4 col-md-3" style='padding: 5px;'>
+            <div class="col-xs-12 panel panel-default" style="margin-bottom:0px; margin-top:0px; padding: 5px; border: solid 1px black;">
+                <div class="panel-body" style="padding: 0px;">
+                    <table class="table" style="margin:0px;">
+                        <tr>
+                            <td style="padding: 0px; width: 100px; height:50px; text-align: center; vertical-align: middle; border:none;">
+                                <a href="/Phone/GetPhones"><img src="/Content/Images/phones.jpg" style="width:150px; height:150px"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0px; height:50px; text-align: center; vertical-align: middle; border:none;">
+                                <a class="btn btn-default btn-lg" style="width:200px;" href="/Phone/GetPhones">Телефоны</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-4 col-md-3" style='padding: 5px;'>
+            <div class="col-xs-12 panel panel-default" style="margin-bottom:0px; margin-top:0px; padding: 5px; border: solid 1px black;">
+                <div class="panel-body" style="padding: 0px;">
+                    <table class="table" style="margin:0px;">
+                        <tr>
+                            <td style="padding: 0px; width: 100px; height:50px; text-align: center; vertical-align: middle; border:none;">
+                                <a href="/Tv/GetTvSets"><img src="/Content/Images/tvSets.jpg" style="width:150px; height:150px"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0px; height:50px; text-align: center; vertical-align: middle; border:none;">
+                                <a class="btn btn-default btn-lg" style="width:200px;" href="/Tv/GetTvSets">Телевизоры</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-4 col-md-3" style='padding: 5px;'>
+            <div class="col-xs-12 panel panel-default" style="margin-bottom:0px; margin-top:0px; padding: 5px; border: solid 1px black;">
+                <div class="panel-body" style="padding: 0px;">
+                    <table class="table" style="margin:0px;">
+                        <tr>
+                            <td style="padding: 0px; width: 100px; height:50px; text-align: center; vertical-align: middle; border:none;">
+                                <a href="/Headphones/GetHeadphonesSets"><img src="/Content/Images/HeadphonesSets.jpg" style="width:150px; height:150px"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0px; height:50px; text-align: center; vertical-align: middle; border:none;">
+                                <a class="btn btn-default btn-lg" style="width:200px;" href="/Headphones/GetHeadphonesSets">Наушники</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

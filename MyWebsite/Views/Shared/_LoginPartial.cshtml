@@ -1,0 +1,78 @@
+﻿@using Microsoft.AspNet.Identity
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("GetOrders", "Order", FormMethod.Post, new { id = "getOrders" }))
+    {
+        @Html.Hidden("userID", User.Identity.GetUserId())
+    }
+
+    using (Html.BeginForm("GetAllProducts", "ShoppingCart", FormMethod.Post, new { id = "getShoppintCart" }))
+    {
+        @Html.Hidden("userID", User.Identity.GetUserId())
+    }
+    
+
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="nav navbar-nav navbar-right" style='padding-top:8px;'>
+            <div class="btn-group">
+                <a class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @User.Identity.GetUserName()
+                </a>
+                <ul class=" dropdown-menu dropdown-menu-left">
+                    <li>
+                        <a class="dropdown-item" href="javascript:document.getElementById('getOrders').submit()">Мои заказы</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="javascript:document.getElementById('getShoppintCart').submit()">Корзина</a>
+                    </li>
+                    <li>
+                        @Html.ActionLink("Управление", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    </li>
+                    @if (User.IsInRole("admin"))
+                    {
+                        <li class="divider"></li>
+                        <li>
+                            @Html.ActionLink("Посмотреть все заказы", "GetAllOrders", "Order")
+                        </li>
+                    }
+                    @if (User.IsInRole("manager"))
+                    {
+                        <li class="divider"></li>
+                        <li>
+                            @Html.ActionLink("Новые заказы", "LookForNewOrders", "Order")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Добавить товар", "AddProduct", "Home")
+                        </li>
+                    }
+                    @if (User.IsInRole("deliveryManager"))
+                    {
+                        <li class="divider"></li>
+                        <li>
+                            @Html.ActionLink("Заказы на выдачу", "LookForDeliveryOrders", "Order")
+                        </li>
+                    }
+                    <li class="divider"></li>
+                    <li><a class="dropdown-item" href="javascript:document.getElementById('logoutForm2').submit()">Выйти</a></li>
+
+                </ul>
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-secondary" href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
+            </div>
+
+        </div>
+    }
+
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Регистрация", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Выполнить вход", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

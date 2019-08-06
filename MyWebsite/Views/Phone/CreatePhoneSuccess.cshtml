@@ -1,0 +1,208 @@
+﻿@model MyWebsite.Models.ViewModel.PhoneViewModel
+@{
+    ViewBag.Title = "CreatePhoneSuccess";
+}
+
+<head>
+    <style>
+        p {
+            font-size: 15px;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .hrVersion2 {
+            padding: 0px;
+            margin-left: -5px;
+            margin-right: -5px;
+            margin-top: 5px;
+            margin-bottom: 0px;
+            border: none;
+            border-top: 1px ridge #aaaaaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="row" style='padding-top:10px;'>
+        <div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2" style='padding: 5px;'>
+            <div class="col-xs-12 panel panel-default" style="margin-bottom:0px; margin-top:0px; padding: 5px; border: solid 1px black;">
+                <div class="panel-body" style="padding: 0px;">
+                    <table class="table" style="margin:0px;">
+                        <tr>
+                            <td style="text-align:center; border:none; margin:0px; padding:0px;">
+                                <h3 style="margin-top:10px; margin-bottom:10px;">@Model.Company @Model.Name</h3>
+                            </td>
+                        </tr>
+                    </table>
+                    <hr class="hrVersion2" style="margin-bottom: 5px;" />
+                    <table class="table" style="margin:0px;">
+                        <tr style="height:25px;">
+                            <td rowspan="13" style="padding: 0px;  text-align: center; vertical-align: middle; width: 200px; height:200px; border:none;">
+                                @Html.Raw("<img style='width:200px; height:200px;' src=\"data:image/jpeg;base64,"
+                          + Convert.ToBase64String(Model.Image) + "\" />")
+                            </td>
+                            <!--Name-->
+                            <td style="padding:0px; text-align:right; vertical-align: middle; border:none; width:200px;">
+                                <p><b>Название:</b></p>
+                            </td>
+                            <td style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p>@Model.Name</p>
+                            </td>
+                        </tr>
+                        <!--Company-->
+                        <tr style="height:25px;">
+                            <td style="padding:0px; text-align:right; vertical-align: middle; border:none;">
+                                <p><b>Компания: </b></p>
+                            </td>
+                            <td style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p>@Model.Company</p>
+                            </td>
+                        </tr>
+                        <!--ScreenDiagonal-->
+                        <tr style="height:25px;">
+                            <td style="padding:0px; text-align:right; vertical-align: middle; border:none;">
+                                <p><b>Диагональ экрана:</b></p>
+                            </td>
+                            <td style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p>@Model.ScreenDiagonal"</p>
+                            </td>
+                        </tr>
+                        <!--CpuName-->
+                        <tr style="height:25px;">
+                            <td style="padding:0px; text-align:right; vertical-align: middle; border:none;">
+                                <p><b>Процессор:</b></p>
+                            </td>
+                            <td style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p>@Model.CpuName</p>
+                            </td>
+                        </tr>
+                        <!--CpuNumberOfCores-->
+                        <tr style="height:25px;">
+                            <td style="padding:0px; text-align:right; vertical-align: middle; border:none;">
+                                <p><b>Количество ядер:</b></p>
+                            </td>
+                            <td style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p>@Model.CpuNumberOfCores</p>
+                            </td>
+                        </tr>
+                        <!--CpuFrequncy-->
+                        <tr style="height:25px;">
+                            <td style="padding:0px; text-align:right; vertical-align: middle; border:none;">
+                                <p><b>Частота:</b></p>
+                            </td>
+                            <td style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p>@Model.CpuFrequncy ГГц</p>
+                            </td>
+                        </tr>
+                        <!--Ram-->
+                        <tr style="height:25px;">
+                            <td style="padding:0px; text-align:right; vertical-align: middle; border:none;">
+                                <p><b>Оперативная память:</b></p>
+                            </td>
+                            <td style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p>@Model.Ram ГБ</p>
+                            </td>
+                        </tr>
+                        <!--Memory-->
+                        <tr style="height:25px;">
+                            <td style="padding:0px; text-align:right; vertical-align: middle; border:none;">
+                                <p><b>Встроенная память:</b></p>
+                            </td>
+                            <td style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p>@Model.Memory ГБ</p>
+                            </td>
+                        </tr>
+                        <!--OperatingSystem-->
+                        <tr style="height:25px;">
+                            <td style="padding:0px; text-align:right; vertical-align: middle; border:none;">
+                                <p><b>Операционная система:</b></p>
+                            </td>
+                            <td style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p>@Model.OperatingSystem</p>
+                            </td>
+                        </tr>
+                        <!--Camera-->
+                        <tr style="height:25px;">
+                            <td style="padding:0px; text-align:right; vertical-align: middle; border:none;">
+                                <p><b>Основная камера:</b></p>
+                            </td>
+                            <td style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p>@Model.Camera Мп</p>
+                            </td>
+                        </tr>
+                        <!--FrontCamera-->
+                        <tr style="height:25px;">
+                            <td style="padding:0px; text-align:right; vertical-align: middle; border:none;">
+                                <p><b>Фронтальная камера:</b></p>
+                            </td>
+                            <td style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p>@Model.FrontCamera Мп</p>
+                            </td>
+                        </tr>
+                        <!--BatteryCapacity-->
+                        <tr style="height:25px;">
+                            <td style="padding:0px; text-align:right; vertical-align: middle; border:none;">
+                                <p><b>Емкость аккумулятора:</b></p>
+                            </td>
+                            <td style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p>@Model.BatteryCapacity мА*ч</p>
+                            </td>
+                        </tr>
+
+                        <!--Price-->
+                        <tr style="height:25px;">
+                            <td style="padding:0px; text-align:right; vertical-align: middle; border:none;">
+                                <p><b>Цена:</b></p>
+                            </td>
+                            <td style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p>@Model.Price грн.</p>
+                            </td>
+                        </tr>
+                    </table>
+                    <hr class="hrVersion2" style="padding-bottom:5px;" />
+                    <!--Description-->
+                    <table class="table" style="margin:0px;">
+                        <tr>
+                            <td style="padding:0px; text-align:right; vertical-align: text-top; width: 90px;border:none;">
+                                <p><b>Описание:</b></p>
+                            </td>
+                            <td colspan="2" style="padding:0px; padding-left:5px; text-align:left; vertical-align: middle; border:none;">
+                                <p style="font-size: 14px;">@Model.Description</p>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <hr class="hrVersion2" />
+                    @using (Html.BeginForm("EditPhone", "Phone", FormMethod.Get, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="phoneId" value="@Model.Id" />
+                        <table class="table" style="margin:0px;">
+                            <tr>
+                                <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                                    <input type="submit" style="margin-top:10px; margin-bottom:5px; width:160px;" class="btn btn-default" value="Редактировать" />
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                </div>
+            </div>
+
+            <hr class="hrVersion2" style="margin-top:22px;" />
+            <table class="table" style="margin:0px;">
+                <tr>
+                    <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                        <a class="btn btn-success btn-lg" style="margin-top:10px; margin-bottom:5px; width:250px;" href="/Phone/CreatePhone">Добавить еще телефон</a>
+                    </td>
+                    <td style="text-align:center; vertical-align: middle; border:none; padding:0px;">
+                        <a class="btn btn-success btn-lg" style="margin-top:10px; margin-bottom:5px; width:250px;" href="/Home/AddProduct">Добавить другой продукт</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>

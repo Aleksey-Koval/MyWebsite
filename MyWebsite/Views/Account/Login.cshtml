@@ -1,0 +1,96 @@
+﻿@using MyWebsite.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Выполнить вход";
+}
+
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3" style="text-align:center">
+        <h2>@ViewBag.Title</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="col-xs-12 panel panel-default" style="margin-bottom:0px; margin-top:0px; padding: 5px; border: solid 1px black;">
+            <div class="panel-body" style="padding: 0px;">
+                <section id="loginForm">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <table class="table" style="margin:0px;">
+                            <tr>
+                                <td style="padding: 0px; width:50%; height:50px; text-align: center; vertical-align: middle; border:none;">
+                                    @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                                </td>
+                                <td style="padding: 0px; text-align: center; vertical-align: middle; border:none;">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0px; height:50px; text-align: center; vertical-align: middle; border:none;">
+                                    @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                                </td>
+                                <td style="padding:0px; text-align: center; vertical-align: middle; border:none;">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="padding:0px; height:50px; text-align: center; vertical-align: middle; border:none;">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="padding:0px; height:50px; text-align: center; vertical-align: middle; border:none;">
+                                    <input type="submit" value="Выполнить вход" class="btn btn-default" />
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="col-md-6 col-md-offset-3"/>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <table class="table table-bordered">
+            <tr>
+                <th style="text-align: center; vertical-align: middle;">
+                    User Name
+                </th>
+                <th style="text-align: center; vertical-align: middle;">
+                    Password
+                </th>
+            </tr>
+            <tr>
+                <td style="text-align: center; vertical-align: middle;">
+                    admin@mail.ru
+                </td>
+                <td rowspan="4" style="text-align: center; vertical-align: middle;">
+                    ad46D_ewr3
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center; vertical-align: middle;">user@mail.ru</td>
+            </tr>
+            <tr>
+                <td style="text-align: center; vertical-align: middle;">manager@mail.ru</td>
+            </tr>
+            <tr>
+                <td style="text-align: center; vertical-align: middle;">deliveryManager@mail.ru</td>
+            </tr>
+        </table> 
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
